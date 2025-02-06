@@ -5,6 +5,7 @@ description = "Add your description here"
 requires-python = ">=3.11"
 dependencies = [
     "crispy-bootstrap4>=2024.10",
+    "django-on-heroku>=1.1.2",
     "django>=5.1.6",
     "django-crispy-forms>=2.3",
     "pandas>=2.2.3",
@@ -12,4 +13,6 @@ dependencies = [
     "psycopg2-binary>=2.9.10",
     "sqlalchemy>=2.0.37",
     "streamlit>=1.42.0",
+    "whitenoise>=6.8.2",
+    "gunicorn>=23.0.0",
 ]
