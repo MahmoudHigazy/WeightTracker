@@ -2,57 +2,69 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container-fluid">
-    <h1 class="mb-4">💪 Weightlifting Tracker</h1>
-    
+<div class="container">
     <div class="row">
         <!-- Sidebar with form -->
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">
+                        <i class="bi bi-plus-circle-fill"></i> Add New Entry
+                    </h4>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Add New Entry</h4>
                     <form method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button type="submit" class="btn btn-primary">Log Exercise</button>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-save"></i> Log Exercise
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
-        
+
         <!-- Main content -->
-        <div class="col-md-9">
+        <div class="col-md-8">
             <!-- Progress Charts -->
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h4 class="card-title">Progress Charts</h4>
-                    <form method="get" class="mb-3">
-                        <div class="form-group">
-                            <select name="exercise" class="form-control" onchange="this.form.submit()">
-                                {% for exercise in exercise_categories.keys %}
-                                <option value="{{ exercise }}" {% if exercise == selected_exercise %}selected{% endif %}>
-                                    {{ exercise }}
-                                </option>
-                                {% endfor %}
-                            </select>
-                        </div>
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="card-title mb-0">
+                        <i class="bi bi-graph-up"></i> Progress Charts
+                    </h4>
+                    <form method="get" class="mb-0">
+                        <select name="exercise" class="form-select" onchange="this.form.submit()">
+                            {% for exercise in exercise_categories.keys %}
+                            <option value="{{ exercise }}" {% if exercise == selected_exercise %}selected{% endif %}>
+                                {{ exercise }}
+                            </option>
+                            {% endfor %}
+                        </select>
                     </form>
+                </div>
+                <div class="card-body">
                     {% if charts %}
                         {{ charts|safe }}
                     {% else %}
-                        <p class="text-muted">No data available for selected exercise.</p>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> No data available for selected exercise.
+                        </div>
                     {% endif %}
                 </div>
             </div>
-            
+
             <!-- Recent Activity -->
-            <div class="card mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">
+                        <i class="bi bi-clock-history"></i> Recent Activity
+                    </h4>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Recent Activity</h4>
                     {% if recent_entries %}
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead>
+                            <table class="table table-hover">
+                                <thead class="table-light">
                                     <tr>
                                         <th>Date</th>
                                         <th>Exercise</th>
@@ -75,19 +87,25 @@
                             </table>
                         </div>
                     {% else %}
-                        <p class="text-muted">No workout data available. Start logging your exercises!</p>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> No workout data available. Start logging your exercises!
+                        </div>
                     {% endif %}
                 </div>
             </div>
-            
+
             <!-- Exercise History -->
             <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">
+                        <i class="bi bi-calendar3"></i> Exercise History
+                    </h4>
+                </div>
                 <div class="card-body">
-                    <h4 class="card-title">Exercise History</h4>
                     {% if all_entries %}
                         <div class="table-responsive">
-                            <table class="table">
-                                <thead>
+                            <table class="table table-hover">
+                                <thead class="table-light">
                                     <tr>
                                         <th>Date</th>
                                         <th>Exercise</th>
@@ -112,7 +130,9 @@
                             </table>
                         </div>
                     {% else %}
-                        <p class="text-muted">No workout history available yet.</p>
+                        <div class="alert alert-info">
+                            <i class="bi bi-info-circle"></i> No workout history available yet.
+                        </div>
                     {% endif %}
                 </div>
             </div>
