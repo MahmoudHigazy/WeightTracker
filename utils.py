@@ -9,7 +9,11 @@ EXERCISE_CATEGORIES = {
     "Dips": "Chest",
     "Lunges": "Legs",
     "Bicep Curls": "Arms",
-    "Tricep Extensions": "Arms"
+    "Tricep Extensions": "Arms",
+    "Power Clean": "Olympic",
+    "Squat Clean": "Olympic",
+    "Clean and Jerk": "Olympic",
+    "Squat Clean and Jerk": "Olympic"
 }
 
 def calculate_one_rep_max(weight, reps):
