@@ -5,7 +5,7 @@ channel = "stable-24_05"
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["sh", "-c", "streamlit run main.py"]
+run = ["sh", "-c", "python manage.py migrate && python manage.py runserver 0.0.0.0:5000"]
 
 [workflows]
 runButton = "Project"
@@ -17,10 +17,10 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Streamlit App"
+args = "Django Server"
 
 [[workflows.workflow]]
-name = "Streamlit App"
+name = "Django Server"
 author = "agent"
 
 [workflows.workflow.metadata]
@@ -31,7 +31,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "streamlit run main.py"
+args = "python manage.py migrate && python manage.py runserver 0.0.0.0:5000"
 waitForPort = 5000
 
 [[ports]]
